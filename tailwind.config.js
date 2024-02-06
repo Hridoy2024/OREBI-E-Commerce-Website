@@ -11,11 +11,11 @@ export default {
         dm: ["DM Sans", "sans-serif"],
       },
 
-      colors:{
-        primary: "#767676",
-        bold: "#262626"
-
-      }
+      colors: {
+        primary: "#262626",
+        secondary: "#767676",
+        textColor: "#6D6D6D",
+      },
     },
   },
   plugins: [],
