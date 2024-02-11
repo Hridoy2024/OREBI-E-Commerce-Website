@@ -19,6 +19,11 @@ const Header = () => {
   const [dropDown, setDropDown] = useState(false);
   const [account, setAccount] = useState(false);
   const [cartDrop, setCartDrop] = useState(false);
+  const [isToggle, setIsToggle] = useState(false);
+
+  const toggle = () => {
+    setIsToggle(!isToggle);
+  };
 
   useEffect(() => {
     document.addEventListener("click", (e) => {
@@ -56,7 +61,9 @@ const Header = () => {
             </Flex>
 
             {dropDown && (
-              <Listul className={`bg-[#262626] w-[263px] mt-[15px absolute z-50`}>
+              <Listul
+                className={`bg-[#262626] w-[263px] mt-[15px absolute z-50`}
+              >
                 <Listli
                   className={`py-4 pl-5 block font-dm font-normal text-[14px] text-white opacity-50 hover:font-bold hover:opacity-100 hover:pl-[30px] duration-300 ease-in-out `}
                 >
@@ -108,7 +115,7 @@ const Header = () => {
           {/* Login */}
           <Flex className={`gap-10`}>
             <div ref={accountRef} className="relative">
-              <Flex className={`gap-[10px] cursor-pointer`}>
+              <Flex onClick={toggle} className={`gap-[10px] cursor-pointer`}>
                 <FaUser className="text-bold" />
                 <IoMdArrowDropdown className="text-bold" />
               </Flex>
