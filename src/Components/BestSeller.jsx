@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Container from "./Container";
 import Slider from "react-slick";
 import Item from "./Item";
@@ -63,10 +63,8 @@ function SamplePrevArrow(props) {
     </div>
   );
 }
+const BestSeller = () => {
 
-const NewArrivals = () => {
-  const [newProduct, setNewProduct] = useState(productsList);
-  const filterNew = newProduct.filter((i) => i.new == true);
   const settings = {
     dots: false,
     infinite: true,
@@ -102,17 +100,16 @@ const NewArrivals = () => {
       },
     ],
   };
-  console.log(productsList);
   return (
     <section className="mt-[128px]">
       <Container>
         <h1 className=" mb-12 font-dm font-bold text-[39px] text-primary">
-          New Arrivals
+        Our Best Sellers
         </h1>
 
         <div className="slider-container">
           <Slider {...settings}>
-            {filterNew.map((item, i) => (
+            {productsList.map((item, i) => (
               <Item item={item} key={i} />
             ))}
           </Slider>
@@ -122,4 +119,4 @@ const NewArrivals = () => {
   );
 };
 
-export default NewArrivals;
+export default BestSeller;

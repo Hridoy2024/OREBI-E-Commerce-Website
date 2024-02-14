@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 import Container from "./Container";
 import Slider from "react-slick";
 import Item from "./Item";
@@ -64,62 +64,62 @@ function SamplePrevArrow(props) {
   );
 }
 
-const NewArrivals = () => {
-  const [newProduct, setNewProduct] = useState(productsList);
-  const filterNew = newProduct.filter((i) => i.new == true);
-  const settings = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
+const SpecialOffer = () => {
+    const [newProduct, setNewProduct] = useState(productsList);
+    const filterNew = newProduct.filter((i) => i.new == true);
+    const settings = {
+      dots: false,
+      infinite: true,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      nextArrow: <SampleNextArrow />,
+      prevArrow: <SamplePrevArrow />,
+  
+      responsive: [
+        {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true,
+          },
         },
-      },
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+        {
+          breakpoint: 992,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+          },
         },
-      },
-
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
+  
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          },
         },
-      },
-    ],
-  };
-  console.log(productsList);
-  return (
-    <section className="mt-[128px]">
-      <Container>
-        <h1 className=" mb-12 font-dm font-bold text-[39px] text-primary">
-          New Arrivals
-        </h1>
+      ],
+    };
+    // console.log(productsList);
+    return (
+      <section className="mt-[128px]">
+        <Container>
+          <h1 className=" mb-12 font-dm font-bold text-[39px] text-primary">
+          Special Offers
+          </h1>
+  
+          <div className="slider-container">
+            <Slider {...settings}>
+              {filterNew.map((item, i) => (
+                <Item item={item} key={i} />
+              ))}
+            </Slider>
+          </div>
+        </Container>
+      </section>
+    );
+}
 
-        <div className="slider-container">
-          <Slider {...settings}>
-            {filterNew.map((item, i) => (
-              <Item item={item} key={i} />
-            ))}
-          </Slider>
-        </div>
-      </Container>
-    </section>
-  );
-};
-
-export default NewArrivals;
+export default SpecialOffer

@@ -19,10 +19,16 @@ const Header = () => {
   const [dropDown, setDropDown] = useState(false);
   const [account, setAccount] = useState(false);
   const [cartDrop, setCartDrop] = useState(false);
-  const [isToggle, setIsToggle] = useState(false);
+  const [toggle, setIsToggle] = useState(false);
 
-  const toggle = () => {
-    setIsToggle(!isToggle);
+  const handletoggle = () => {
+    setIsToggle(!toggle);
+    setCartDrop(!cartDrop);
+  };
+
+  const off = () => {
+    setCartDrop(false);
+    setIsToggle(false);
   };
 
   useEffect(() => {
@@ -42,9 +48,7 @@ const Header = () => {
         ? setAccount(true)
         : setAccount(false);
 
-      cartRef.current.contains(e.target)
-        ? setCartDrop(true)
-        : setCartDrop(false);
+      cartRef.current.contains(e.target) ? setCartDrop(true) : off();
     });
   }, []);
   return (
@@ -138,9 +142,12 @@ const Header = () => {
             </div>
 
             <div ref={cartRef} className="relative">
-              <FaShoppingCart className="text-primary cursor-pointer" />
+              <FaShoppingCart
+                onClick={handletoggle}
+                className="text-primary cursor-pointer"
+              />
 
-              {cartDrop && (
+              {cartDrop && toggle ? (
                 <div className="w-[360px] bg-white absolute right-0 shadow-sm z-50">
                   <Flex
                     className={`p-5 bg-[#f5f5f3] items-center gap-5 relative`}
@@ -176,6 +183,8 @@ const Header = () => {
                     </Flex>
                   </div>
                 </div>
+              ) : (
+                ""
               )}
             </div>
           </Flex>
