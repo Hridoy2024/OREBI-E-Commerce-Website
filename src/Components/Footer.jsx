@@ -114,7 +114,7 @@ const Footer = () => {
             </div>
 
             <div>
-              <h3 className="font-dm font-bold text-[16px] leading-[27px] text-primary w-[186px] ">
+              <h3 className="font-dm font-bold text-sm  leading-[27px] text-primary w-[186px] ">
                 (052) 611-5711 company@domain.com
               </h3>
 
@@ -128,14 +128,16 @@ const Footer = () => {
           </div>
         </Flex>
 
-        <Flex className={`mt-[65px] items-center justify-between pb-[52px] flex-col gap-5 lg:flex-row lg:gap-0`}>
+        <Flex
+          className={`mt-[65px] items-center justify-between pb-[52px] flex-col gap-5 lg:flex-row lg:gap-0`}
+        >
           <Flex className={`gap-[25px]`}>
             <LiaFacebookF />
             <FaLinkedinIn />
             <FaInstagram />
           </Flex>
 
-          <p className="font-dm font-normal text-[14px] text-textColor ">
+          <p className="font-dm font-normal text-[14px] text-textColor leading-[23px] text-center lg:text-left">
             2020 Orebi Minimal eCommerce Figma Template by Adveits
           </p>
         </Flex>

@@ -5,6 +5,8 @@ import Image from "./Image";
 import Listul from "./Listul";
 import Listli from "./Listli";
 import { FaBarsStaggered } from "react-icons/fa6";
+import About from "./../Pages/About";
+import { Link } from "react-router-dom";
 
 const Navigation = () => {
   const [dropDown, setDropDown] = useState(false);
@@ -12,7 +14,9 @@ const Navigation = () => {
     <nav className=" bg-white py-[32px] relative">
       <Container>
         <Flex className="items-center justify-between ">
-          <Image src="/images/logo.png" />
+          <Link to="/">
+            <Image src="/images/logo.png" />
+          </Link>
           <FaBarsStaggered
             onClick={() => setDropDown(!dropDown)}
             size={22}
@@ -28,7 +32,7 @@ const Navigation = () => {
               href="#"
               className="font-dm font-normal text-[14px] lg:text-primary  lg:p-0 py-3 block text-white hover:text-bold hover:font-bold"
             >
-              Home
+              <Link to="/">Home</Link>
             </Listli>
             <Listli
               href="#"
@@ -40,13 +44,13 @@ const Navigation = () => {
               href="#"
               className="font-dm font-normal text-[14px] lg:text-primary lg:p-0 py-3 block text-white hover:text-bold hover:font-bold"
             >
-              About
+              <Link to="/about">About</Link>
             </Listli>
             <Listli
               href="#"
               className="font-dm font-normal text-[14px] lg:text-primary lg:p-0 py-3 block text-white hover:text-bold hover:font-bold"
             >
-              Contacts
+              <Link to="/contact">Contacts</Link>
             </Listli>
             <Listli
               href="#"
