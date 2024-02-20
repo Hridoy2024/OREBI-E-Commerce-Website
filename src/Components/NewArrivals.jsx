@@ -76,6 +76,16 @@ const NewArrivals = () => {
     prevArrow: <SamplePrevArrow />,
 
     responsive: [
+
+      {
+        breakpoint: 1400,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
       {
         breakpoint: 1200,
         settings: {

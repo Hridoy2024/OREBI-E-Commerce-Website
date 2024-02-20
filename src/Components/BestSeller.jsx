@@ -64,7 +64,6 @@ function SamplePrevArrow(props) {
   );
 }
 const BestSeller = () => {
-
   const settings = {
     dots: false,
     infinite: true,
@@ -74,6 +73,15 @@ const BestSeller = () => {
     prevArrow: <SamplePrevArrow />,
 
     responsive: [
+      {
+        breakpoint: 1400,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
       {
         breakpoint: 1200,
         settings: {
@@ -104,7 +112,7 @@ const BestSeller = () => {
     <section className="mt-[128px]">
       <Container>
         <h1 className=" mb-12 font-dm font-bold text-[39px] text-primary">
-        Our Best Sellers
+          Our Best Sellers
         </h1>
 
         <div className="slider-container">
