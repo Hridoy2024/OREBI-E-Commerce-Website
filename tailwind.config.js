@@ -16,6 +16,9 @@ export default {
         secondary: "#767676",
         textColor: "#6D6D6D",
       },
+      backgroundImage: {
+        dot: "url('/dot.png')",
+      },
     },
   },
   plugins: [],

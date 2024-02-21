@@ -24,10 +24,7 @@ const Signup = () => {
         </div>
 
         {/* Form Start */}
-        <form
-          action=""
-          className="mt-[57px] pb-[70px] border-b-[1px] border-[#F0F0F0] "
-        >
+        <form action="" className="mt-[57px] pb-[70px] ">
           <h2 className="font-dm font-bold text-4xl lg:text-[42px] text-primary mb-[42px]">
             Your Personal Details
           </h2>
@@ -42,7 +39,7 @@ const Signup = () => {
               </label>
 
               <input
-                className=" w-full md:w-[508px] block pt-[10px] pb-4 border-b-[1px] border-[#F0F0F0] placeholder:font-dm placeholder:font-normal placeholder:text-[14px]  placeholder:text-secondary "
+                className=" w-full lg:w-[508px] block pt-[10px] pb-4 border-b-[1px] border-[#F0F0F0] placeholder:font-dm placeholder:font-normal placeholder:text-[14px]  placeholder:text-secondary "
                 type="text"
                 name=""
                 id=""
@@ -270,17 +267,63 @@ const Signup = () => {
 
           <div className="mt-[65px]">
             <Flex className={`items-center gap-4 `}>
-              <input type="radio" name="" id="" className="appearance-none w-[11px] h-[11px] border-[1px] border-secondary " />
-              <label className="font-dm font-normal text-[14px] text-secondary " htmlFor="">
+              <input
+                type="radio"
+                name=""
+                id=""
+                className="appearance-none w-[11px] h-[11px] border-[1px] border-secondary checked:bg-dot checked:bg-[length:7px_7px] checked:bg-no-repeat checked:bg-center "
+              />
+              <label
+                className="font-dm font-normal text-[14px] text-secondary "
+                htmlFor=""
+              >
                 I have read and agree to the Privacy Policy
               </label>
             </Flex>
           </div>
+
+          <Flex className={`gap-[33px] mt-[23px]`}>
+            <p className="font-dm font-normal text-[14px] text-secondary ">
+              Subscribe Newsletter
+            </p>
+
+            <Flex className={`items-center gap-10 `}>
+              <Flex className={`items-center gap-4 `}>
+                <input
+                  type="radio"
+                  name="accept"
+                  id="yes"
+                  className="appearance-none w-[11px] h-[11px] border-[1px] border-secondary checked:bg-dot checked:bg-[length:7px_7px] checked:bg-no-repeat checked:bg-center "
+                />
+                <label
+                  className="font-dm font-normal text-[14px] text-secondary "
+                  htmlFor="yes"
+                >
+                  Yes
+                </label>
+              </Flex>
+
+              <Flex className={`items-center gap-4 `}>
+                <input
+                  type="radio"
+                  name="accept"
+                  id="no"
+                  className="appearance-none w-[11px] h-[11px] border-[1px] border-secondary checked:bg-dot checked:bg-[length:7px_7px] checked:bg-no-repeat checked:bg-center "
+                />
+                <label
+                  className="font-dm font-normal text-[14px] text-secondary "
+                  htmlFor="no"
+                >
+                  No
+                </label>
+              </Flex>
+            </Flex>
+          </Flex>
           <button
             type="submit"
-            className="font-dm font-bold text-[14px] text-primary py-4 px-[83px] border-[1px] border-primary mt-[30px] "
+            className="font-dm font-bold text-[14px] text-white bg-primary py-4 px-[83px] border-[1px] border-primary mt-[30px] "
           >
-            Log in
+            Sign Up
           </button>
         </form>
         {/* Form End */}
