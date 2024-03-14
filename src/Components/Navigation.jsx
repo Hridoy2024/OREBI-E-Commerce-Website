@@ -38,7 +38,7 @@ const Navigation = () => {
               href="#"
               className="font-dm font-normal text-[14px] lg:text-primary  lg:p-0py-3 block text-white hover:text-bold hover:font-bold"
             >
-              Shop
+              <Link to={`/shop`}>Shop</Link>
             </Listli>
             <Listli
               href="#"

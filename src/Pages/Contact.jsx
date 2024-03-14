@@ -1,18 +1,12 @@
 import React from "react";
 import Container from "../Components/Container";
+import Breadcums from "../Components/Breadcums";
 
-const Contact = () => {
+const Contact = ({title}) => {
   return (
     <section className="mt-[124px]">
       <Container>
-        <div>
-          <h2 className="font-dm font-bold text-[50px] text-primary  ">
-            Contacts
-          </h2>
-          <p className="font-dm font-normal text-[12px] text-secondary mt-3">
-            Home {">"} Contacts
-          </p>
-        </div>
+       <Breadcums title={title}/>
 
         <form action="" className="mt-[125px]">
           <h1 className="font-dm font-bold text-[40px] text-primary   ">

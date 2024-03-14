@@ -11,16 +11,18 @@ import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
+import Shop from "./Pages/Shop";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route>
         <Route index element={<Home />} />
-        <Route path="/about" element={<About/>} />
-        <Route path="/contact" element={<Contact/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/signup" element={<Signup/>} />
+        <Route path="/about" element={<About title="About" />} />
+        <Route path="/shop" element={<Shop title="Products" />} />
+        <Route path="/contact" element={<Contact title="Contacts" />} />
+        <Route path="/login" element={<Login title="Login" />} />
+        <Route path="/signup" element={<Signup title="Signup" />} />
       </Route>
     </Route>
   )

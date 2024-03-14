@@ -1,19 +1,13 @@
 import React from "react";
 import Container from "../Components/Container";
 import Flex from "../Components/Flex";
+import Breadcums from "../Components/Breadcums";
 
-const Login = () => {
+const Login = ({ title }) => {
   return (
     <section className="mt-[124px]">
       <Container>
-        <div>
-          <h2 className="font-dm font-bold text-[50px] text-primary  ">
-            Login
-          </h2>
-          <p className="font-dm font-normal text-[12px] text-secondary mt-3">
-            Home {">"} Login
-          </p>
-        </div>
+        <Breadcums title={title} />
 
         <div className="mt-[127px] pb-[62px] border-b-[1px] border-[#F0F0F0] ">
           <p className="font-dm font-normal text-[16px] text-secondary lg:w-[644px]">

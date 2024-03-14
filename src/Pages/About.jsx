@@ -4,20 +4,13 @@ import Flex from "../Components/Flex";
 import Image from "../Components/Image";
 import about1 from "../assets/About1.png";
 import about2 from "../assets/About2.png";
+import Breadcums from "../Components/Breadcums";
 
-const About = () => {
+const About = ({title}) => {
   return (
     <section className="mt-[124px]">
       <Container>
-        <div>
-          <h2 className="font-dm font-bold text-[50px] text-primary  ">
-            About
-          </h2>
-          <p className="font-dm font-normal text-[12px] text-secondary mt-3">
-            Home {">"} Products
-          </p>
-        </div>
-
+      <Breadcums title={title} />
         <Flex
           className={` gap-10 lg:gap-0 flex-col  lg:flex-row justify-between items-center mt-[136px] `}
         >
