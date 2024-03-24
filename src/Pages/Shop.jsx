@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Container from "../Components/Container";
 import Breadcums from "../Components/Breadcums";
 import Flex from "../Components/Flex";
@@ -10,6 +11,37 @@ import ShopByPrice from "../Components/ShopByPrice";
 import ProductComponents from "../Components/ProductComponents";
 
 const Shop = ({ title }) => {
+  const [products, setProducts] = useState([]);
+  const [uniqueCategory, setUniqueCategory] = useState([]);
+
+  const [filterResult, setFilterResult] = useState([]);
+  useEffect(() => {
+    const fetchData = () => {
+      axios.get("https://dummyjson.com/products").then((data) => {
+        setProducts(data.data.products);
+      });
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    setUniqueCategory([...new Set(products.map((p) => p.category))]);
+    setFilterResult(products);
+  }, [products]);
+
+  // console.log(uniqueCategory);
+
+  const handleFilter = (cat) => {
+    console.log(cat);
+    const filterProduct = products.filter((p) => p.category == cat);
+    setFilterResult(filterProduct);
+  };
+
+  const showAllProducts = () => {
+    setFilterResult(products);
+  };
+
   return (
     <section className="mt-[124px]">
       <Container>
@@ -23,10 +55,21 @@ const Shop = ({ title }) => {
               </h2>
 
               <Listul>
-                <ShopByCategory categoryName="Category 1" option={true} />
-                <ShopByCategory categoryName="Category 2" option={false} />
-                <ShopByCategory categoryName="Category 3" option={true} />
-                <ShopByCategory categoryName="Category 4" option={false} />
+                <ShopByCategory
+                  onClick={showAllProducts}
+                  categoryName={"All"}
+                  option={false}
+                />
+                {uniqueCategory.map((cat, i) => {
+                  return (
+                    <ShopByCategory
+                      onClick={handleFilter}
+                      categoryName={cat}
+                      option={false}
+                      key={i}
+                    />
+                  );
+                })}
               </Listul>
 
               <ShopByColor />
@@ -35,7 +78,7 @@ const Shop = ({ title }) => {
             </div>
           </div>
           <div className="w-9/12">
-            <ProductComponents/>
+            <ProductComponents products={filterResult} />
           </div>
         </Flex>
       </Container>

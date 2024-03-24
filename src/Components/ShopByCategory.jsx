@@ -4,14 +4,17 @@ import Flex from "./Flex";
 import { FaPlus, FaMinus } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
-const ShopByCategory = ({ categoryName, option }) => {
+const ShopByCategory = ({ categoryName, option, onClick }) => {
   const [showOption, setShowOption] = useState(false);
   return (
-    <Listli className={`mt-[35px]  `}>
+    <Listli onClick={() => onClick(categoryName)} className={`mt-[35px]  `}>
       <Flex
         className={`items-center pb-5 justify-between border-b-[1px] border-solid`}
       >
-        <h2 className="font-dm font-normal text-[16px] text-secondary  ">
+        <h2
+          onClick={() => onClick(categoryName)}
+          className="capitalize cursor-pointer font-dm font-normal text-[16px] text-secondary  "
+        >
           {categoryName}
         </h2>
 

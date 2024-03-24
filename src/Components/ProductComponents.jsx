@@ -1,33 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Flex from "./Flex";
 import { MdWindow } from "react-icons/md";
 import { FaListUl } from "react-icons/fa";
-import axios from "axios";
 import { data } from "autoprefixer";
 import PaginationbyGridView from "./PaginationbyGridView";
+import PaginationForListView from "./PaginationForListView";
 
-const ProductComponents = () => {
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    const fetchData = () => {
-      axios.get("https://dummyjson.com/products").then((data) => {
-        setProducts(data.data.products);
-      });
-    };
-
-    fetchData();
-  }, []);
+const ProductComponents = ({ products }) => {
+  const [showProducts, setShowProducts] = useState(6);
+  const [view, setView] = useState("grid");
+  const toggleView = (v) => {
+    setView(v);
+  };
 
   return (
     <div>
       <Flex className={` items-center justify-between`}>
         <Flex className={` items-center gap-5`}>
-          <div className="p-3 bg-primary ">
-            <MdWindow className="text-[15px] text-white" />
+          <div
+            onClick={() => toggleView("grid")}
+            className={`p-3 ${
+              view === "grid"
+                ? "bg-primary"
+                : "bg-white border-[1px] border-solid "
+            } `}
+          >
+            <MdWindow
+              className={`text-[15px]  ${
+                view === "grid" ? "text-white" : "text-primary"
+              } `}
+            />
           </div>
 
-          <div className=" p-3 bg-white border-[1px] border-solid  ">
-            <FaListUl className="text-[15px]" />
+          <div
+            onClick={() => toggleView("list")}
+            className={`p-3  border-[1px] border-solid ${
+              view === "list" ? "bg-primary" : "bg-white"
+            } `}
+          >
+            <FaListUl
+              className={`text-[15px]${
+                view === "list" ? "text-white" : "text-primary"
+              } `}
+            />
           </div>
         </Flex>
 
@@ -37,6 +52,7 @@ const ProductComponents = () => {
               Sort by:
             </label>
             <select
+              onChange={(e) => setShowProducts(e.target.value)}
               id="countries"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm:block w-[239px] p-2.5 "
             >
@@ -53,21 +69,32 @@ const ProductComponents = () => {
               Show:
             </label>
             <select
+              onChange={(e) => setShowProducts(parseInt(e.target.value))}
               id="countries"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm:block w-[139px] p-2.5 "
             >
-              <option selected>Choose</option>
-              <option value="US">36</option>
-              <option value="CA">40</option>
-              <option value="FR">50</option>
-              <option value="DE">60</option>
+              <option value={6} selected>
+                6
+              </option>
+              <option value={12}>12</option>
+              <option value={24}>24</option>
             </select>
           </Flex>
         </Flex>
       </Flex>
 
       <div className="mt-[60px]">
-        <PaginationbyGridView itemsPerPage={6} products={products} />
+        {view == "grid" ? (
+          <PaginationbyGridView
+            itemsPerPage={showProducts}
+            products={products}
+          />
+        ) : (
+          <PaginationForListView
+            itemsPerPage={showProducts}
+            products={products}
+          />
+        )}
       </div>
     </div>
   );
