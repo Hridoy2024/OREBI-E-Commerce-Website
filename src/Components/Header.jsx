@@ -11,15 +11,46 @@ import { FaShoppingCart } from "react-icons/fa";
 import Image from "./Image";
 import img from "../assets/headerimg.png";
 import { FaTimes } from "react-icons/fa";
+import axios from "axios";
 
 const Header = () => {
+  const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState([]);
   const dropDownRef = useRef();
   const accountRef = useRef();
   const cartRef = useRef();
+  const searchRef = useRef();
   const [dropDown, setDropDown] = useState(false);
   const [account, setAccount] = useState(false);
   const [cartDrop, setCartDrop] = useState(false);
   const [toggle, setIsToggle] = useState(false);
+  const [searchBar, setSearchBar] = useState(false);
+  useEffect(() => {
+    const fetchData = () => {
+      axios.get("https://dummyjson.com/products").then((data) => {
+        setProducts(data.data.products);
+      });
+    };
+
+    fetchData();
+  }, []);
+
+  const handleSearch = (e) => {
+    if (e.target.value == "") {
+      setSearch([]);
+    } else {
+      const result = products.filter((item) =>
+        item.title.toLowerCase().includes(e.target.value.toLowerCase())
+      );
+      setSearch(result);
+    }
+  };
+
+  const showFilter =() =>{
+    
+  }
+
+  console.log(search);
 
   const handletoggle = () => {
     setIsToggle(!toggle);
@@ -49,6 +80,10 @@ const Header = () => {
         : setAccount(false);
 
       cartRef.current.contains(e.target) ? setCartDrop(true) : off();
+
+      searchRef.current.contains(e.target)
+        ? setSearchBar(true)
+        : setSearchBar(false);
     });
   }, []);
   return (
@@ -105,15 +140,41 @@ const Header = () => {
           {/* catagory button end */}
 
           {/* Search  */}
-          <div className="relative w-[600px]">
+          <div ref={searchRef} className="relative w-[600px]">
             <input
+              onChange={handleSearch}
               className="w-full py-4 pl-5 placeholder:font-dm font-normal text-[14px] text-[#c4c4c4] "
               type="text"
               placeholder="Search Products"
             />
+            <FaSearch onClick={showFilter} className="absolute top-[50%] translate-y-[-50%] right-5 cursor-pointer " />
 
-            <FaSearch className="absolute top-[50%] translate-y-[-50%] right-5 " />
+            {searchBar && (
+              <div className="w-full max-h-[200px] bg-white absolute left-0 top-14 overflow-y-scroll">
+                {search.map((result) => (
+                  <Flex
+                    className={`bg-gray-100 p-3 justify-between items-center`}
+                  >
+                    <Flex className={`gap-5 items-center`}>
+                      <Image
+                        className={`h-18 w-32 object-cover`}
+                        src={result.thumbnail}
+                      />
+                      <div>
+                        <h1>{result.title}</h1>
+                        <p>${result.price}</p>
+                      </div>
+                    </Flex>
+
+                    <button className="px-4 py-2 bg-primary text-white font-dm font-normal text-sm ">
+                      View
+                    </button>
+                  </Flex>
+                ))}
+              </div>
+            )}
           </div>
+
           {/* Search End */}
 
           {/* Login */}
