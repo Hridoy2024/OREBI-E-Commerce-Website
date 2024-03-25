@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Container from "./Container";
 import Flex from "./Flex";
 import Listul from "./Listul";
@@ -11,9 +13,9 @@ import { FaShoppingCart } from "react-icons/fa";
 import Image from "./Image";
 import img from "../assets/headerimg.png";
 import { FaTimes } from "react-icons/fa";
-import axios from "axios";
 
 const Header = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState([]);
   const dropDownRef = useRef();
@@ -46,11 +48,11 @@ const Header = () => {
     }
   };
 
-  const showFilter =() =>{
-    
-  }
+  const showFilter = () => {
+    navigate("/productfilter", { state: { key: search } });
+  };
 
-  console.log(search);
+  // console.log(search);
 
   const handletoggle = () => {
     setIsToggle(!toggle);
@@ -147,10 +149,13 @@ const Header = () => {
               type="text"
               placeholder="Search Products"
             />
-            <FaSearch onClick={showFilter} className="absolute top-[50%] translate-y-[-50%] right-5 cursor-pointer " />
+            <FaSearch
+              onClick={showFilter}
+              className="absolute top-[50%] translate-y-[-50%] right-5 cursor-pointer "
+            />
 
             {searchBar && (
-              <div className="w-full max-h-[200px] bg-white absolute left-0 top-14 overflow-y-scroll">
+              <div className="w-full max-h-[200px] bg-white absolute left-0 top-14 overflow-y-scroll z-50">
                 {search.map((result) => (
                   <Flex
                     className={`bg-gray-100 p-3 justify-between items-center`}
