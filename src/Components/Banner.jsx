@@ -92,21 +92,27 @@ const Banner = () => {
       <div className="bg-white py-[30px]">
         <Container>
           <Flex className={`justify-between flex-col md:flex-row `}>
-            <Flex className={`items-center gap-[17px] justify-center my-3 md:my-0`}>
+            <Flex
+              className={`items-center gap-[17px] justify-center my-3 md:my-0`}
+            >
               <span className="font-dm font-bold text-[30px]">2</span>
               <p className="font-dm font-normal text-[16px] text-[#6D6D6D]">
                 Two years warranty
               </p>
             </Flex>
 
-            <Flex className={`items-center gap-[15px] justify-center my-3 md:my-0`}>
+            <Flex
+              className={`items-center gap-[15px] justify-center my-3 md:my-0`}
+            >
               <FaTruck size={25} />
               <p className="font-dm font-normal text-[16px] text-[#6D6D6D]">
                 Free shipping
               </p>
             </Flex>
 
-            <Flex className={`items-center gap-[15px] justify-center my-3 md:my-0`}>
+            <Flex
+              className={`items-center gap-[15px] justify-center my-3 md:my-0`}
+            >
               <VscDebugRestart size={25} />
               <p className="font-dm font-normal text-[16px] text-[#6D6D6D]">
                 Return policy in 30 days

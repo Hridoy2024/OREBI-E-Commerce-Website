@@ -16,7 +16,7 @@ const Home = () => {
       <BestSeller/>
       <BestProduct/>
       <SpecialOffer/>
-      <About/>
+      {/* <About/> */}
     </section>
   );
 };
