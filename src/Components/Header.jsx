@@ -13,8 +13,11 @@ import { FaShoppingCart } from "react-icons/fa";
 import Image from "./Image";
 import img from "../assets/headerimg.png";
 import { FaTimes } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { productsReducer } from "../slices/ProductsSlice";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState([]);
@@ -27,10 +30,12 @@ const Header = () => {
   const [cartDrop, setCartDrop] = useState(false);
   const [toggle, setIsToggle] = useState(false);
   const [searchBar, setSearchBar] = useState(false);
+
   useEffect(() => {
     const fetchData = () => {
       axios.get("https://dummyjson.com/products").then((data) => {
         setProducts(data.data.products);
+        dispatch(productsReducer(data.data.products));
       });
     };
 

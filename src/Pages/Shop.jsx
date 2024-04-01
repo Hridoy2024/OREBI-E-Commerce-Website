@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import Container from "../Components/Container";
 import Breadcums from "../Components/Breadcums";
 import Flex from "../Components/Flex";
@@ -9,28 +8,17 @@ import ShopByColor from "../Components/ShopByColor";
 import ShopByBrand from "../Components/ShopByBrand";
 import ShopByPrice from "../Components/ShopByPrice";
 import ProductComponents from "../Components/ProductComponents";
+import { useSelector } from "react-redux";
 
 const Shop = ({ title }) => {
-  const [products, setProducts] = useState([]);
+  const products = useSelector((state) => state.allProducts.products);
   const [uniqueCategory, setUniqueCategory] = useState([]);
-
   const [filterResult, setFilterResult] = useState([]);
-  useEffect(() => {
-    const fetchData = () => {
-      axios.get("https://dummyjson.com/products").then((data) => {
-        setProducts(data.data.products);
-      });
-    };
-
-    fetchData();
-  }, []);
 
   useEffect(() => {
     setUniqueCategory([...new Set(products.map((p) => p.category))]);
     setFilterResult(products);
   }, [products]);
-
-  // console.log(uniqueCategory);
 
   const handleFilter = (cat) => {
     console.log(cat);

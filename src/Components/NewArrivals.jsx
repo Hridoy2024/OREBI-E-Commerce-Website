@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import Container from "./Container";
 import Slider from "react-slick";
 import Item from "./Item";
-import { productsList } from "../API";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { IoIosArrowRoundForward } from "react-icons/io";
+import { useSelector } from "react-redux";
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -65,8 +65,8 @@ function SamplePrevArrow(props) {
 }
 
 const NewArrivals = () => {
-  const [newProduct, setNewProduct] = useState(productsList);
-  const filterNew = newProduct.filter((i) => i.new == true);
+  const products = useSelector((state) => state.allProducts.products);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -76,7 +76,6 @@ const NewArrivals = () => {
     prevArrow: <SamplePrevArrow />,
 
     responsive: [
-
       {
         breakpoint: 1400,
         settings: {
@@ -112,7 +111,7 @@ const NewArrivals = () => {
       },
     ],
   };
-  console.log(productsList);
+  // console.log(productsList);
   return (
     <section className="mt-[128px]">
       <Container>
@@ -122,7 +121,7 @@ const NewArrivals = () => {
 
         <div className="slider-container">
           <Slider {...settings}>
-            {filterNew.map((item, i) => (
+            {products.map((item, i) => (
               <Item item={item} key={i} />
             ))}
           </Slider>

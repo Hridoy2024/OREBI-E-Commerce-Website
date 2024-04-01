@@ -2,9 +2,9 @@ import React from "react";
 import Container from "./Container";
 import Slider from "react-slick";
 import Item from "./Item";
-import { productsList } from "../API";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { IoIosArrowRoundForward } from "react-icons/io";
+import { useSelector } from "react-redux";
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -64,6 +64,7 @@ function SamplePrevArrow(props) {
   );
 }
 const BestSeller = () => {
+  const products = useSelector((state) => state.allProducts.products);
   const settings = {
     dots: false,
     infinite: true,
@@ -117,7 +118,7 @@ const BestSeller = () => {
 
         <div className="slider-container">
           <Slider {...settings}>
-            {productsList.map((item, i) => (
+            {products.map((item, i) => (
               <Item item={item} key={i} />
             ))}
           </Slider>
