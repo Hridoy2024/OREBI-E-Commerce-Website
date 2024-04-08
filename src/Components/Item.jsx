@@ -1,14 +1,22 @@
 import React from "react";
 import Flex from "./Flex";
 import Image from "./Image";
+import { useNavigate } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import { TfiReload } from "react-icons/tfi";
 import { FaCartShopping } from "react-icons/fa6";
 
-const Item = ({ item , className}) => {
-
+const Item = ({ item, className }) => {
+  const navigate = useNavigate();
+  const showProduct = (id) => {
+    // console.log(id);
+    navigate(`/product/${id}`);
+  };
   return (
-    <div className={`w-[370px] mx-auto group ${className}`}>
+    <div
+      onClick={() => showProduct(item.id)}
+      className={`w-[370px] mx-auto group cursor-pointer ${className}`}
+    >
       <div className=" relative overflow-hidden">
         <Image
           src={item.thumbnail}

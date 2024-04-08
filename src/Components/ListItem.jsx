@@ -5,6 +5,7 @@ import { Rate } from "antd";
 import { FaHeart } from "react-icons/fa";
 import { TfiReload } from "react-icons/tfi";
 import { FaCartShopping } from "react-icons/fa6";
+import StarRating from "./StarRating";
 
 const ListItem = ({ item, className }) => {
   return (
@@ -24,7 +25,8 @@ const ListItem = ({ item, className }) => {
             <h2 className="font-dm font-semibold text-[14px] text-primary my-3 ">
               {item ? item.description : "fvwierwer"}
             </h2>
-            <Rate allowHalf disabled defaultValue={item ? item.rating : 5} />
+            {/* <Rate allowHalf disabled defaultValue={item ? item.rating : 5} /> */}
+            <StarRating starCount={item?.rating} />
           </div>
         </Flex>
 
