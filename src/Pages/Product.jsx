@@ -5,9 +5,10 @@ import Breadcums from "../Components/Breadcums";
 import Flex from "../Components/Flex";
 import Image from "../Components/Image";
 import { useParams } from "react-router-dom";
-// import { Rate } from "antd";
+import { Rate } from "antd";
 import StarRating from "../Components/StarRating";
 // import Flex from "./../Components/Flex";
+import { TiPlus } from "react-icons/ti";
 
 const Product = ({ title }) => {
   const [targetProduct, setTargetProduct] = useState({});
@@ -136,6 +137,137 @@ const Product = ({ title }) => {
                 Add to Cart
               </button>
             </Flex>
+
+            <Flex
+              className={`py-6 border-b-[1px] border-solid items-center justify-between`}
+            >
+              <h2 className=" font-dm font-bold text-[16px] leading-[23px] text-primary">
+                FEATURES & DETAILS
+              </h2>
+
+              <TiPlus />
+            </Flex>
+
+            <Flex
+              className={`py-[30px] border-b-[1px] justify-between items-center `}
+            >
+              <h2 className="font-dm font-bold text-[16px] leading-[27px]  ">
+                SHIPPING & RETURNS
+              </h2>
+
+              <TiPlus />
+            </Flex>
+
+            <Flex>
+              <div className="py-[19px]">
+                <p className="text-secondary font-dm text-[16px] font-normal leading-[30px]">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+              </div>
+            </Flex>
+
+            <div className="mt-[123px]">
+              <Flex className={` items-center gap-[62px]`}>
+                <h2
+                  className={` font-dm  text-[20px]  leading-[29px] cursor-pointer`}
+                >
+                  Description
+                </h2>
+                <h2
+                  className={` font-dm  text-[20px] 
+                 leading-[29px] font-bold cursor-pointer`}
+                >
+                  Reviews (1)
+                </h2>
+              </Flex>
+
+              <div className="mt-[42px]">
+                <div>
+                  <p className=" pb-4 border-b-[1px] border-solid font-dm font-normal text-[14px] leading-[30px] text-secondary">
+                    1 review for Product
+                  </p>
+
+                  <div className="pt-6 pb-4 border-b-[1px] border-solid">
+                    <Flex className={`items-center justify-between`}>
+                      <Flex className={`items-center gap-[37px]`}>
+                        <h1 className=" font-dm font-normal text-[16px] leading-[30px] text-primary">
+                          John Ford
+                        </h1>
+                        <Flex>
+                          <Rate defaultValue={5} />
+                        </Flex>
+                      </Flex>
+
+                      <span className=" font-dm font-normal text-[16px] text-secondary">
+                        6 months ago
+                      </span>
+                    </Flex>
+
+                    <p className=" font-dm font-normal text-[16px] leading-[30px] text-secondary mt-[14px]">
+                      Lorem Ipsum is simply dummy text of the printing and
+                      typesetting industry. Lorem Ipsum has been the industry's
+                      standard dummy text ever since the 1500s, when an unknown
+                      printer took a galley of type and scrambled it to make a
+                      type specimen book. It has survived not only five
+                      centuries, but also the leap into electronic typesetting,
+                      remaining essentially unchanged.
+                    </p>
+                  </div>
+                </div>
+
+                <form action="" className="mt-[53px] mb-[341px]  ">
+                  <h1 className="mb-12 font-dm font-bold text-[20px] text-primary">
+                    Add a Review
+                  </h1>
+
+                  <div className="mb-[23px]">
+                    <label
+                      className=" font-dm font-bold text-[16px] leading-[23px] text-primary"
+                      htmlFor=""
+                    >
+                      Name
+                    </label>
+
+                    <input
+                      className="w-full block border-b border-[#f0f0f0] pt-[10px] pb-[16px] placeholder:font-dm placeholder:font-normal placeholder:text-[14px] placeholder:text-secondary"
+                      type="text"
+                      placeholder="Your name here"
+                    />
+                  </div>
+                  <div className="mb-[23px]">
+                    <label className=" font-dm font-bold text-[16px] leading-[23px] text-primary">
+                      Email
+                    </label>
+
+                    <input
+                      className=" w-full block border-b border-[#f0f0f0] pt-[10px] pb-[16px] placeholder:font-dm placeholder:font-normal placeholder:text-[14px] placeholder:text-secondary"
+                      type="email"
+                      placeholder="Your email here"
+                    />
+                  </div>
+
+                  <div className="mb-[23px]">
+                    <label className=" font-dm font-bold text-[16px] leading-[23px] text-primary">
+                      Review
+                    </label>
+
+                    <input
+                      className=" w-full block border-b border-[#f0f0f0] pt-[10px] pb-[86px] placeholder:font-dm placeholder:font-normal placeholder:text-[14px] placeholder:text-secondary"
+                      type="text"
+                      placeholder="Your review here"
+                    />
+                  </div>
+
+                  <button
+                    className=" font-dm font-bold text-[14px] text-white py-4 px-[88px] bg-primary"
+                    type="submit"
+                  >
+                    Post
+                  </button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </Container>
