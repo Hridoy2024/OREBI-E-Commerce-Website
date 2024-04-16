@@ -15,6 +15,7 @@ import img from "../assets/headerimg.png";
 import { FaTimes } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { productsReducer } from "../slices/ProductsSlice";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -245,9 +246,12 @@ const Header = () => {
                     </p>
 
                     <Flex className={`justify-between mt-3 `}>
-                      <button className=" py-4 px-10 border-[1px] border-[#2b2b2b] font-dm font-bold text-[14px] text-primary  ">
+                      <Link
+                        to={`/cart`}
+                        className=" py-4 px-10 border-[1px] border-[#2b2b2b] font-dm font-bold text-[14px] text-primary  "
+                      >
                         View Cart
-                      </button>
+                      </Link>
                       <button className=" py-4 px-10 border-[1px] border-[#2b2b2b] font-dm font-bold text-[14px] text-white bg-primary  ">
                         Checkout
                       </button>
