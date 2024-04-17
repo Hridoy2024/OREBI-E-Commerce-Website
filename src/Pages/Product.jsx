@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 import Container from "../Components/Container";
 import Breadcums from "../Components/Breadcums";
@@ -7,10 +8,11 @@ import Image from "../Components/Image";
 import { useParams } from "react-router-dom";
 import { Rate } from "antd";
 import StarRating from "../Components/StarRating";
-// import Flex from "./../Components/Flex";
 import { TiPlus } from "react-icons/ti";
+import { CartReducer } from "../slices/CartSlice";
 
 const Product = ({ title }) => {
+  const dispatch = useDispatch();
   const [targetProduct, setTargetProduct] = useState({});
   const { productID } = useParams();
 
@@ -18,7 +20,11 @@ const Product = ({ title }) => {
     axios.get(`https://dummyjson.com/products/${productID}`).then((data) => {
       setTargetProduct(data.data);
     });
-  });
+  }, []);
+
+  const addTocart = (item) => {
+    dispatch(CartReducer({ ...item, qun: 1 }));
+  };
 
   return (
     <section className="mt-[123px]">
@@ -133,7 +139,10 @@ const Product = ({ title }) => {
               <button className="font-dm font-bold text-[14px] border-[1px] border-primary py-4 px-10 bg-white text-primary">
                 Add to Wish List
               </button>
-              <button className="font-dm font-bold text-[14px] border-[1px] border-primary py-4 px-10 bg-primary text-white">
+              <button
+                onClick={() => addTocart(targetProduct)}
+                className="font-dm font-bold text-[14px] border-[1px] border-primary py-4 px-10 bg-primary text-white"
+              >
                 Add to Cart
               </button>
             </Flex>
