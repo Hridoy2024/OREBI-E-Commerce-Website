@@ -9,8 +9,17 @@ export const CartSlice = createSlice({
   },
   reducers: {
     CartReducer: (state, action) => {
-      state.cartArray = [...state.cartArray, action.payload];
-      localStorage.setItem("orebiCart", JSON.stringify(state.cartArray));
+      let productIndex = state.cartArray.findIndex(
+        (item) => item.id == action.payload.id
+      );
+
+      if (productIndex == -1) {
+        state.cartArray = [...state.cartArray, action.payload];
+        localStorage.setItem("orebiCart", JSON.stringify(state.cartArray));
+      } else {
+        state.cartArray[productIndex].qun++;
+        localStorage.setItem("orebiCart", JSON.stringify(state.cartArray));
+      }
     },
   },
 });

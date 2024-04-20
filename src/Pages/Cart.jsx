@@ -4,9 +4,11 @@ import Breadcums from "../Components/Breadcums";
 import Flex from "../Components/Flex";
 import { FaTimes } from "react-icons/fa";
 import Image from "../Components/Image";
-// import Flex from "./../Components/Flex";
+import { useSelector } from "react-redux";
 
 const Cart = ({ title }) => {
+  const cartData = useSelector((state) => state.cart.cartArray);
+  console.log(cartData);
   return (
     <section className="mt-[124px]">
       <Container>
@@ -39,45 +41,50 @@ const Cart = ({ title }) => {
           {/* cart header end */}
 
           {/* cart main start */}
+          {cartData.map((cItem, i) => (
+            <Flex className={`border-[1px] border-[#F0F0F0]`}>
+              <div className="w-1/4">
+                <Flex className={`items-center gap-10 py-[30px] px-5 `}>
+                  <FaTimes />
 
-          <Flex className={`border-[1px] border-[#F0F0F0]`}>
-            <div className="w-1/4">
-              <Flex className={`items-center gap-10 py-[30px] px-5 `}>
-                <FaTimes />
+                  <Flex className={`items-center gap-5`}>
+                    <Image
+                      className={`w-[100px] h-[100px]`}
+                      src={cItem.thumbnail}
+                    />
+                    <p className="font-dm font-bold text-[16px] text-primary">
+                      {cItem.title}
+                    </p>
+                  </Flex>
+                </Flex>
+              </div>
 
-                <Flex className={`items-center gap-5`}>
-                  <Image className={`w-[100px] h-[100px]`} src={`/item4.png`} />
-                  <p className="font-dm font-bold text-[16px] text-primary">
-                    iPhone 9
+              <div className="w-1/4">
+                <Flex className={`items-center h-full`}>
+                  <p className="font-dm font-bold text-[20px] text-primary">
+                    ${cItem.price}
                   </p>
                 </Flex>
-              </Flex>
-            </div>
-
-            <div className="w-1/4">
-              <Flex className={`items-center h-full`}>
-                <p className="font-dm font-bold text-[20px] text-primary">
-                  $44.00
-                </p>
-              </Flex>
-            </div>
-            <div className="w-1/4">
-              <Flex className={`items-center h-full`}>
-                <Flex className={`w-[139px] border-[1px] border-gray-300 `}>
-                  <button className="w-1/3 py-2">-</button>
-                  <button className="w-1/3 py-2">1</button>
-                  <button className="w-1/3 py-2">+</button>
+              </div>
+              <div className="w-1/4">
+                <Flex className={`items-center h-full`}>
+                  <Flex className={`w-[139px] border-[1px] border-gray-300 `}>
+                    <button className="w-1/3 py-2">-</button>
+                    <button className="w-1/3 py-2">{cItem.qun}</button>
+                    <button className="w-1/3 py-2">+</button>
+                  </Flex>
                 </Flex>
-              </Flex>
-            </div>
-            <div className="w-1/4">
-              <Flex className={`items-center h-full`}>
-                <p className="font-dm font-bold text-[20px] text-primary">
-                  $44.00
-                </p>
-              </Flex>
-            </div>
-          </Flex>
+              </div>
+              <div className="w-1/4">
+                <Flex className={`items-center h-full`}>
+                  <p className="font-dm font-bold text-[20px] text-primary">
+                    $44.00
+                  </p>
+                </Flex>
+              </div>
+            </Flex>
+          ))}
+
           {/* cart main end */}
 
           {/* lower section */}
@@ -136,7 +143,9 @@ const Cart = ({ title }) => {
               </div>
             </Flex>
 
-            <button className=" ms-auto block mt-[30px] font-dm font-bold text-[14px] text-white bg-primary py-[16px] px-[24px] ">Proceed to Checkout</button>
+            <button className=" ms-auto block mt-[30px] font-dm font-bold text-[14px] text-white bg-primary py-[16px] px-[24px] ">
+              Proceed to Checkout
+            </button>
           </div>
           {/* total section end */}
         </div>

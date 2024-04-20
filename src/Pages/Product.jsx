@@ -22,7 +22,7 @@ const Product = ({ title }) => {
     });
   }, []);
 
-  const addTocart = (item) => {
+  const addTocart = (item ) => {
     dispatch(CartReducer({ ...item, qun: 1 }));
   };
 
@@ -37,7 +37,7 @@ const Product = ({ title }) => {
               ? targetProduct.images?.map((img) => (
                   <Image
                     className={`w-[780px] h-[780px] mb-10 object-cover `}
-                    src={img}
+                    src= {img}
                   />
                 ))
               : "Img"}
