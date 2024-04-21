@@ -13,11 +13,12 @@ import { FaShoppingCart } from "react-icons/fa";
 import Image from "./Image";
 import img from "../assets/headerimg.png";
 import { FaTimes } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { productsReducer } from "../slices/ProductsSlice";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+  const cartData = useSelector((state) => state.cart.cartArray);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
@@ -221,23 +222,35 @@ const Header = () => {
 
               {cartDrop && toggle ? (
                 <div className="w-[360px] bg-white absolute right-0 shadow-sm z-50">
-                  <Flex
-                    className={`p-5 bg-[#f5f5f3] items-center gap-5 relative`}
-                  >
-                    <Image src={img} />
+                  <div className="h-[240px] w-full overflow-y-scroll">
+                    {cartData.length > 0 ? (
+                      cartData.map((item, i) => (
+                        <Flex
+                          key={i}
+                          className={`p-5 bg-[#f5f5f3] items-center gap-5 relative`}
+                        >
+                          <Image
+                            className={`w-[80px] h-[80px] object-cover `}
+                            src={item.thumbnail}
+                          />
 
-                    <div>
-                      <h3 className="font-dm font-bold text-[14px] text-primary  ">
-                        Black Smart Watch
-                      </h3>
+                          <div>
+                            <h3 className="font-dm font-bold text-[14px] text-primary  ">
+                              {item.title}
+                            </h3>
 
-                      <p className="font-dm font-bold text-[14px] text-primary  ">
-                        $44.00
-                      </p>
-                    </div>
+                            <p className="font-dm font-bold text-[14px] text-primary  ">
+                              ${item.price}
+                            </p>
+                          </div>
 
-                    <FaTimes className="absolute top-[50%] translate-y-[-50%] right-3" />
-                  </Flex>
+                          <FaTimes className="absolute top-[50%] translate-y-[-50%] right-3" />
+                        </Flex>
+                      ))
+                    ) : (
+                      <h1>Cart Empty </h1>
+                    )}
+                  </div>
 
                   <div className="p-5">
                     <p className="font-dm font-normal text-[16px] leading-[23px] text-secondary  ">

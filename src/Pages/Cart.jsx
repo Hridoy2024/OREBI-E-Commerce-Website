@@ -4,11 +4,23 @@ import Breadcums from "../Components/Breadcums";
 import Flex from "../Components/Flex";
 import { FaTimes } from "react-icons/fa";
 import Image from "../Components/Image";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { productRemove, updateQuantity } from "../slices/CartSlice";
+import { RiH1 } from "react-icons/ri";
 
 const Cart = ({ title }) => {
   const cartData = useSelector((state) => state.cart.cartArray);
-  console.log(cartData);
+  const dispatch = useDispatch();
+  // console.log(cartData);
+
+  const quantity = (index, num) => {
+    dispatch(updateQuantity({ i: index, num }));
+  };
+
+  const removeProduct = (item) => {
+    dispatch(productRemove(item.id));
+    // console.log(item);
+  };
   return (
     <section className="mt-[124px]">
       <Container>
@@ -41,49 +53,75 @@ const Cart = ({ title }) => {
           {/* cart header end */}
 
           {/* cart main start */}
-          {cartData.map((cItem, i) => (
-            <Flex className={`border-[1px] border-[#F0F0F0]`}>
-              <div className="w-1/4">
-                <Flex className={`items-center gap-10 py-[30px] px-5 `}>
-                  <FaTimes />
-
-                  <Flex className={`items-center gap-5`}>
-                    <Image
-                      className={`w-[100px] h-[100px]`}
-                      src={cItem.thumbnail}
+          {cartData.length > 0 ? (
+            cartData.map((cItem, i) => (
+              <Flex className={`border-[1px] border-[#F0F0F0]`} key={i}>
+                <div className="w-1/4">
+                  <Flex className={`items-center gap-10 py-[30px] px-5 `}>
+                    <FaTimes
+                      className="cursor-pointer"
+                      onClick={() => removeProduct(cItem)}
                     />
-                    <p className="font-dm font-bold text-[16px] text-primary">
-                      {cItem.title}
+
+                    <Flex className={`items-center gap-5`}>
+                      <Image
+                        className={`w-[100px] h-[100px]`}
+                        src={cItem.thumbnail}
+                      />
+                      <p className="font-dm font-bold text-[16px] text-primary">
+                        {cItem.title}
+                      </p>
+                    </Flex>
+                  </Flex>
+                </div>
+
+                <div className="w-1/4">
+                  <Flex className={`items-center h-full`}>
+                    <p className="font-dm font-bold text-[20px] text-primary">
+                      ${cItem.price}
                     </p>
                   </Flex>
-                </Flex>
-              </div>
-
-              <div className="w-1/4">
-                <Flex className={`items-center h-full`}>
-                  <p className="font-dm font-bold text-[20px] text-primary">
-                    ${cItem.price}
-                  </p>
-                </Flex>
-              </div>
-              <div className="w-1/4">
-                <Flex className={`items-center h-full`}>
-                  <Flex className={`w-[139px] border-[1px] border-gray-300 `}>
-                    <button className="w-1/3 py-2">-</button>
-                    <button className="w-1/3 py-2">{cItem.qun}</button>
-                    <button className="w-1/3 py-2">+</button>
+                </div>
+                <div className="w-1/4">
+                  <Flex className={`items-center h-full`}>
+                    <Flex className={`w-[139px] border-[1px] border-gray-300 `}>
+                      <button
+                        onClick={() => quantity(i, -1)}
+                        className="w-1/3 font-dm font-normal text-[16px] text-secondary p-2 "
+                      >
+                        -
+                      </button>
+                      <button className="w-1/3 flex justify-center font-dm font-normal text-[16px] text-secondary p-2">
+                        {cItem.qun}
+                      </button>
+                      <button
+                        onClick={() => quantity(i, 1)}
+                        className="w-1/3 font-dm font-normal text-[16px] text-secondary p-2"
+                      >
+                        +
+                      </button>
+                    </Flex>
                   </Flex>
-                </Flex>
-              </div>
-              <div className="w-1/4">
-                <Flex className={`items-center h-full`}>
-                  <p className="font-dm font-bold text-[20px] text-primary">
-                    $44.00
-                  </p>
-                </Flex>
-              </div>
-            </Flex>
-          ))}
+                </div>
+                <div className="w-1/4">
+                  <Flex className={`items-center h-full`}>
+                    <p className="font-dm font-bold text-[20px] text-primary">
+                      $
+                      {Math.round(
+                        (cItem.price -
+                          (cItem.price * cItem.discountPercentage) / 100) *
+                          cItem.qun
+                      )}
+                    </p>
+                  </Flex>
+                </div>
+              </Flex>
+            ))
+          ) : 
+            <h1 className="font-dm font-bold text-3xl text-center text-green-500 py-5">
+              Cart is Empty
+            </h1>
+          }
 
           {/* cart main end */}
 
