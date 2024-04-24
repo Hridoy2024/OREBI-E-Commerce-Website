@@ -18,6 +18,7 @@ import { productsReducer } from "../slices/ProductsSlice";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+  const [price, setPrice] = useState(0);
   const cartData = useSelector((state) => state.cart.cartArray);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -43,6 +44,26 @@ const Header = () => {
 
     fetchData();
   }, []);
+
+  const calculateTotal = () => {
+    let p = 0;
+
+    cartData.map(
+      (cItem) =>
+        (p =
+          p +
+          Math.round(
+            (cItem.price - (cItem.price * cItem.discountPercentage) / 100) *
+              cItem.qun
+          ))
+    );
+
+    setPrice(p);
+  };
+
+  useEffect(() => {
+    calculateTotal();
+  });
 
   const handleSearch = (e) => {
     if (e.target.value == "") {
@@ -255,7 +276,7 @@ const Header = () => {
                   <div className="p-5">
                     <p className="font-dm font-normal text-[16px] leading-[23px] text-secondary  ">
                       Subtotal:{" "}
-                      <span className="font-bold text-primary ">$44.00</span>
+                      <span className="font-bold text-primary ">${price}</span>
                     </p>
 
                     <Flex className={`justify-between mt-3 `}>

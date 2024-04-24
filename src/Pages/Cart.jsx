@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "../Components/Container";
 import Breadcums from "../Components/Breadcums";
 import Flex from "../Components/Flex";
@@ -9,9 +9,9 @@ import { productRemove, updateQuantity } from "../slices/CartSlice";
 import { RiH1 } from "react-icons/ri";
 
 const Cart = ({ title }) => {
+  const [price, setPrice] = useState(0);
   const cartData = useSelector((state) => state.cart.cartArray);
   const dispatch = useDispatch();
-  // console.log(cartData);
 
   const quantity = (index, num) => {
     dispatch(updateQuantity({ i: index, num }));
@@ -19,8 +19,27 @@ const Cart = ({ title }) => {
 
   const removeProduct = (item) => {
     dispatch(productRemove(item.id));
-    // console.log(item);
   };
+
+  const calculateTotal = () => {
+    let p = 0;
+
+    cartData.map(
+      (cItem) =>
+        (p =
+          p +
+          Math.round(
+            (cItem.price - (cItem.price * cItem.discountPercentage) / 100) *
+              cItem.qun
+          ))
+    );
+
+    setPrice(p);
+  };
+
+  useEffect(() => {
+    calculateTotal();
+  });
   return (
     <section className="mt-[124px]">
       <Container>
@@ -117,11 +136,11 @@ const Cart = ({ title }) => {
                 </div>
               </Flex>
             ))
-          ) : 
+          ) : (
             <h1 className="font-dm font-bold text-3xl text-center text-green-500 py-5">
               Cart is Empty
             </h1>
-          }
+          )}
 
           {/* cart main end */}
 
@@ -168,7 +187,7 @@ const Cart = ({ title }) => {
                 Subtotal
               </div>
               <div className="w-1/2 border-[1px] border-[#F0F0F0] p-5">
-                2294 $
+                {price} $
               </div>
             </Flex>
 
@@ -177,7 +196,7 @@ const Cart = ({ title }) => {
                 Total
               </div>
               <div className="w-1/2 border-[1px] border-[#F0F0F0] p-5">
-                2294 $
+                {price} $
               </div>
             </Flex>
 

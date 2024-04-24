@@ -8,13 +8,15 @@ import Image from "../Components/Image";
 import { useParams } from "react-router-dom";
 import { Rate } from "antd";
 import StarRating from "../Components/StarRating";
-import { TiPlus } from "react-icons/ti";
+import { TiMinus, TiPlus } from "react-icons/ti";
 import { CartReducer } from "../slices/CartSlice";
 
 const Product = ({ title }) => {
   const dispatch = useDispatch();
   const [targetProduct, setTargetProduct] = useState({});
   const { productID } = useParams();
+  const [shipping, setShipping] = useState(true);
+  const [section, setSection] = useState("review");
 
   useEffect(() => {
     axios.get(`https://dummyjson.com/products/${productID}`).then((data) => {
@@ -22,7 +24,7 @@ const Product = ({ title }) => {
     });
   }, []);
 
-  const addTocart = (item ) => {
+  const addTocart = (item) => {
     dispatch(CartReducer({ ...item, qun: 1 }));
   };
 
@@ -37,7 +39,7 @@ const Product = ({ title }) => {
               ? targetProduct.images?.map((img) => (
                   <Image
                     className={`w-[780px] h-[780px] mb-10 object-cover `}
-                    src= {img}
+                    src={img}
                   />
                 ))
               : "Img"}
@@ -157,62 +159,92 @@ const Product = ({ title }) => {
               <TiPlus />
             </Flex>
 
-            <Flex
-              className={`py-[30px] border-b-[1px] justify-between items-center `}
-            >
-              <h2 className="font-dm font-bold text-[16px] leading-[27px]  ">
-                SHIPPING & RETURNS
-              </h2>
+            <div>
+              <Flex
+                className={`py-[30px] border-b-[1px] justify-between items-center `}
+              >
+                <h2 className="font-dm font-bold text-[16px] leading-[27px]  ">
+                  SHIPPING & RETURNS
+                </h2>
+                {shipping ? (
+                  <TiMinus onClick={() => setShipping(!shipping)} />
+                ) : (
+                  <TiPlus onClick={() => setShipping(!shipping)} />
+                )}
+              </Flex>
 
-              <TiPlus />
-            </Flex>
-
-            <Flex>
-              <div className="py-[19px]">
-                <p className="text-secondary font-dm text-[16px] font-normal leading-[30px]">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-              </div>
-            </Flex>
+              <Flex>
+                {shipping && (
+                  <p className=" py-[19px] text-secondary font-dm text-[16px] font-normal leading-[30px]">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua.
+                  </p>
+                )}
+              </Flex>
+            </div>
 
             <div className="mt-[123px]">
               <Flex className={` items-center gap-[62px]`}>
                 <h2
-                  className={` font-dm  text-[20px]  leading-[29px] cursor-pointer`}
+                  onClick={() => setSection("desc")}
+                  className={` font-dm  text-[20px] ${
+                    section == "desc"
+                      ? "text-primary font-bold"
+                      : "text-secondary font-normal"
+                  } leading-[29px] cursor-pointer`}
                 >
                   Description
                 </h2>
+
                 <h2
-                  className={` font-dm  text-[20px] 
-                 leading-[29px] font-bold cursor-pointer`}
+                  onClick={() => setSection("review")}
+                  className={` font-dm  text-[20px] ${
+                    section == "review"
+                      ? "text-primary font-bold"
+                      : "text-secondary font-normal"
+                  } leading-[29px] cursor-pointer`}
                 >
                   Reviews (1)
                 </h2>
               </Flex>
 
               <div className="mt-[42px]">
-                <div>
-                  <p className=" pb-4 border-b-[1px] border-solid font-dm font-normal text-[14px] leading-[30px] text-secondary">
-                    1 review for Product
-                  </p>
+                {section == "review" ? (
+                  <div>
+                    <p className=" pb-4 border-b-[1px] border-solid font-dm font-normal text-[14px] leading-[30px] text-secondary">
+                      1 review for Product
+                    </p>
 
-                  <div className="pt-6 pb-4 border-b-[1px] border-solid">
-                    <Flex className={`items-center justify-between`}>
-                      <Flex className={`items-center gap-[37px]`}>
-                        <h1 className=" font-dm font-normal text-[16px] leading-[30px] text-primary">
-                          John Ford
-                        </h1>
-                        <Flex>
-                          <Rate defaultValue={5} />
+                    <div className="pt-6 pb-4 border-b-[1px] border-solid">
+                      <Flex className={`items-center justify-between`}>
+                        <Flex className={`items-center gap-[37px]`}>
+                          <h1 className=" font-dm font-normal text-[16px] leading-[30px] text-primary">
+                            John Ford
+                          </h1>
+                          <Flex>
+                            <Rate defaultValue={5} />
+                          </Flex>
                         </Flex>
+
+                        <span className=" font-dm font-normal text-[16px] text-secondary">
+                          6 months ago
+                        </span>
                       </Flex>
 
-                      <span className=" font-dm font-normal text-[16px] text-secondary">
-                        6 months ago
-                      </span>
-                    </Flex>
-
+                      <p className=" font-dm font-normal text-[16px] leading-[30px] text-secondary mt-[14px]">
+                        Lorem Ipsum is simply dummy text of the printing and
+                        typesetting industry. Lorem Ipsum has been the
+                        industry's standard dummy text ever since the 1500s,
+                        when an unknown printer took a galley of type and
+                        scrambled it to make a type specimen book. It has
+                        survived not only five centuries, but also the leap into
+                        electronic typesetting, remaining essentially unchanged.
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div>
                     <p className=" font-dm font-normal text-[16px] leading-[30px] text-secondary mt-[14px]">
                       Lorem Ipsum is simply dummy text of the printing and
                       typesetting industry. Lorem Ipsum has been the industry's
@@ -223,7 +255,7 @@ const Product = ({ title }) => {
                       remaining essentially unchanged.
                     </p>
                   </div>
-                </div>
+                )}
 
                 <form action="" className="mt-[53px] mb-[341px]  ">
                   <h1 className="mb-12 font-dm font-bold text-[20px] text-primary">
