@@ -16,6 +16,7 @@ import { FaTimes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { productsReducer } from "../slices/ProductsSlice";
 import { Link } from "react-router-dom";
+import { productRemove } from "../slices/CartSlice";
 
 const Header = () => {
   const [price, setPrice] = useState(0);
@@ -116,6 +117,15 @@ const Header = () => {
         : setSearchBar(false);
     });
   }, []);
+
+  const gotoCheckout = () => {
+    navigate("/checkout");
+  };
+
+  const removeProduct = (item) => {
+    dispatch(productRemove(item.id));
+  };
+
   return (
     <header className="bg-[#F5F5F3] py-[25px]">
       <Container>
@@ -265,11 +275,16 @@ const Header = () => {
                             </p>
                           </div>
 
-                          <FaTimes className="absolute top-[50%] translate-y-[-50%] right-3" />
+                          <FaTimes
+                            onClick={() => removeProduct(item)}
+                            className="absolute top-[50%] translate-y-[-50%] right-3"
+                          />
                         </Flex>
                       ))
                     ) : (
-                      <h1>Cart Empty </h1>
+                      <h1 className="text-center font-dm font-medium text-4xl">
+                        Cart Empty{" "}
+                      </h1>
                     )}
                   </div>
 
@@ -286,7 +301,10 @@ const Header = () => {
                       >
                         View Cart
                       </Link>
-                      <button className=" py-4 px-10 border-[1px] border-[#2b2b2b] font-dm font-bold text-[14px] text-white bg-primary  ">
+                      <button
+                        onClick={gotoCheckout}
+                        className=" py-4 px-10 border-[1px] border-[#2b2b2b] font-dm font-bold text-[14px] text-white bg-primary  "
+                      >
                         Checkout
                       </button>
                     </Flex>

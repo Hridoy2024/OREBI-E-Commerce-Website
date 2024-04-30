@@ -7,11 +7,13 @@ import Image from "../Components/Image";
 import { useDispatch, useSelector } from "react-redux";
 import { productRemove, updateQuantity } from "../slices/CartSlice";
 import { RiH1 } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
 const Cart = ({ title }) => {
   const [price, setPrice] = useState(0);
   const cartData = useSelector((state) => state.cart.cartArray);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const quantity = (index, num) => {
     dispatch(updateQuantity({ i: index, num }));
@@ -40,6 +42,11 @@ const Cart = ({ title }) => {
   useEffect(() => {
     calculateTotal();
   });
+
+  const gotoCheckout = () => {
+    navigate("/checkout");
+  };
+
   return (
     <section className="mt-[124px]">
       <Container>
@@ -200,7 +207,10 @@ const Cart = ({ title }) => {
               </div>
             </Flex>
 
-            <button className=" ms-auto block mt-[30px] font-dm font-bold text-[14px] text-white bg-primary py-[16px] px-[24px] ">
+            <button
+              onClick={gotoCheckout}
+              className=" ms-auto block mt-[30px] font-dm font-bold text-[14px] text-white bg-primary py-[16px] px-[24px] "
+            >
               Proceed to Checkout
             </button>
           </div>

@@ -17,6 +17,7 @@ import ProductFilter from "./Pages/ProductFilter";
 import Product from "./Pages/Product";
 import Cart from "./Pages/Cart";
 import Error from "./Components/Error";
+import Checkout from "./Pages/Checkout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -38,6 +39,8 @@ const router = createBrowserRouter(
         <Route path="/contact" element={<Contact title="Contacts" />} />
         <Route path="/login" element={<Login title="Login" />} />
         <Route path="/signup" element={<Signup title="Signup" />} />
+        <Route path="/checkout" element={<Checkout title="Checkout" />} />
+
         <Route path="*" element={<Error />} />
       </Route>
     </Route>

@@ -10,6 +10,8 @@ import { Rate } from "antd";
 import StarRating from "../Components/StarRating";
 import { TiMinus, TiPlus } from "react-icons/ti";
 import { CartReducer } from "../slices/CartSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Product = ({ title }) => {
   const dispatch = useDispatch();
@@ -26,10 +28,21 @@ const Product = ({ title }) => {
 
   const addTocart = (item) => {
     dispatch(CartReducer({ ...item, qun: 1 }));
+    toast.success("Added to cart", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   };
 
   return (
     <section className="mt-[123px]">
+      <ToastContainer />
       <Container>
         <Breadcums title={title} />
 
