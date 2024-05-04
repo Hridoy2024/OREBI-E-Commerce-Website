@@ -5,7 +5,6 @@ import Image from "./Image";
 import Listul from "./Listul";
 import Listli from "./Listli";
 import { FaBarsStaggered } from "react-icons/fa6";
-import About from "./../Pages/About";
 import { Link } from "react-router-dom";
 
 const Navigation = () => {
@@ -52,11 +51,12 @@ const Navigation = () => {
             >
               <Link to="/contact">Contacts</Link>
             </Listli>
+
             <Listli
               href="#"
               className="font-dm font-normal text-[14px] lg:text-primary lg:p-0 py-3 block text-white hover:text-bold hover:font-bold"
             >
-              Journal
+              <Link to="*">Journal</Link>
             </Listli>
           </Listul>
         </Flex>
